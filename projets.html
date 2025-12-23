@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets - ETIMAR</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <!-- Header identique à Capture.html -->
+  <header class="main-header">
+    <div class="header-left">
+      <a href="Capture.html" class="logo-link">
+        <img src="img_Slide/" alt="Logo Etimar" class="logo">
+        
+      </a>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="expertises.html">Expertises</a></li>
+        <li><a href="projets.html" class="active">Projets</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+      
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    
+  </header>
+  <div id="nav-overlay" class="nav-overlay">
+    <ul>
+      <li><a href="expertises.html">Expertises</a></li>
+      <li><a href="projets.html" class="active">Projets</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+    
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Image header -->
+  <section class="projets-header">
+    <img src="img_Slide/cap.webp" alt="Header Projets" class="projets-header-img">
+  </section>
+  <h1 class="projets-header-title">Nos Réalisations</h1>
+
+  <!-- Cartes de catégories -->
+  <section class="projets-categories">
+    <div class="categories-grid">
+      <div class="categorie-card active" data-categorie="all">Toutes</div>
+      <div class="categorie-card" data-categorie="architecture">Architecture</div>
+      <div class="categorie-card" data-categorie="batiment">Bâtiment</div>
+      <div class="categorie-card" data-categorie="hopital">Hôpital</div>
+    </div>
+  </section>
+
+  <!-- Galerie de projets -->
+  <section class="projets-galerie">
+    <div class="projets-grid">
+      <!-- Architecture -->
+      <div class="projet-item" data-categorie="architecture" data-index="0">
+        <img src="Projets_Rea/RENDER (7).jpg" alt="Projet Architecture 1">
+        <p>Projet RENDER (7)</p>
+      </div>
+      <div class="projet-item" data-categorie="architecture" data-index="1">
+        <img src="Projets_Rea/PP5.jpg" alt="Projet Architecture 2">
+        <p>Projet PP5</p>
+      </div>
+      <div class="projet-item" data-categorie="architecture" data-index="2">
+        <img src="Projets_Rea/PP.jpg" alt="Projet Architecture 3">
+        <p>Projet PP</p>
+      </div>
+      <!-- Batiment -->
+      <div class="projet-item" data-categorie="batiment" data-index="3">
+        <img src="Projets_Rea/ADU 039.jpg" alt="Projet Batiment 1">
+        <p>Projet ADU 039</p>
+      </div>
+      <div class="projet-item" data-categorie="batiment" data-index="4">
+        <img src="Projets_Rea/01.JPG" alt="Projet Batiment 2">
+        <p>Projet 01</p>
+      </div>
+      <div class="projet-item" data-categorie="batiment" data-index="5">
+        <img src="Projets_Rea/04.JPG" alt="Projet Batiment 3">
+        <p>Projet 04</p>
+      </div>
+      <!-- Hopital -->
+      <div class="projet-item" data-categorie="hopital" data-index="6">
+        <img src="Projets_Rea/PHOTO-2021-04-01-13-20-42.jpg" alt="Projet Hopital 1">
+        <p>Projet PHOTO-2021-04-01-13-20-42</p>
+      </div>
+      <div class="projet-item" data-categorie="hopital" data-index="7">
+        <img src="Projets_Rea/PHOTO-2021-04-01-13-20-43.jpg" alt="Projet Hopital 2">
+        <p>Projet PHOTO-2021-04-01-13-20-43</p>
+      </div>
+      <div class="projet-item" data-categorie="hopital" data-index="8">
+        <img src="Projets_Rea/PHOTO-2021-04-01-13-20-44.jpg" alt="Projet Hopital 3">
+        <p>Projet PHOTO-2021-04-01-13-20-44</p>
+      </div>
+      <div class="projet-item" data-categorie="hopital" data-index="9">
+        <img src="Projets_Rea/PHOTO-2021-03-20-09-41-55 (1).jpg" alt="Projet Hopital 4">
+        <p>Projet PHOTO-2021-03-20-09-41-55 (1)</p>
+      </div>
+      <div class="projet-item" data-categorie="hopital" data-index="10">
+        <img src="Projets_Rea/PHOTO-2021-03-20-09-41-55 (2).jpg" alt="Projet Hopital 5">
+        <p>Projet PHOTO-2021-03-20-09-41-55 (2)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modale galerie projet -->
+  <div id="modal-projet" class="modal-projet" style="display:none;">
+    <div class="modal-content">
+      <span class="modal-close" id="modal-close">&times;</span>
+      <div class="modal-gallery" id="modal-gallery"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Filtrage des projets par catégorie
+    const cards = document.querySelectorAll('.categorie-card');
+    const items = document.querySelectorAll('.projet-item');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const cat = card.dataset.categorie;
+        items.forEach(item => {
+          if (cat === 'all' || item.dataset.categorie === cat) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Images par projet (exemple)
+    const projetsImages = [
+      // Architecture 1
+      [
+        'Projets_Rea/RENDER (7).jpg',
+        'Projets_Rea/PP5.jpg',
+        'Projets_Rea/PP.jpg',
+        'Projets_Rea/ADU 039.jpg'
+      ],
+      // Architecture 2
+      [
+        'Projets_Rea/PP5.jpg',
+        'Projets_Rea/RENDER (7).jpg',
+        'Projets_Rea/PP.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-42.jpg'
+      ],
+      // Architecture 3
+      [
+        'Projets_Rea/PP.jpg',
+        'Projets_Rea/PP5.jpg',
+        'Projets_Rea/RENDER (7).jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-43.jpg'
+      ],
+      // Batiment 1
+      [
+        'Projets_Rea/ADU 039.jpg',
+        'Projets_Rea/01.JPG',
+        'Projets_Rea/04.JPG',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-44.jpg'
+      ],
+      // Batiment 2
+      [
+        'Projets_Rea/01.JPG',
+        'Projets_Rea/ADU 039.jpg',
+        'Projets_Rea/04.JPG',
+        'Projets_Rea/PHOTO-2021-03-20-09-41-55 (1).jpg'
+      ],
+      // Batiment 3
+      [
+        'Projets_Rea/04.JPG',
+        'Projets_Rea/01.JPG',
+        'Projets_Rea/ADU 039.jpg',
+        'Projets_Rea/PHOTO-2021-03-20-09-41-55 (2).jpg'
+      ],
+      // Hopital 1
+      [
+        'Projets_Rea/PHOTO-2021-04-01-13-20-42.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-43.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-44.jpg',
+        'Projets_Rea/PHOTO-2021-03-20-09-41-55 (1).jpg'
+      ],
+      // Hopital 2
+      [
+        'Projets_Rea/PHOTO-2021-04-01-13-20-43.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-42.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-44.jpg',
+        'Projets_Rea/PHOTO-2021-03-20-09-41-55 (2).jpg'
+      ],
+      // Hopital 3
+      [
+        'Projets_Rea/PHOTO-2021-04-01-13-20-44.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-42.jpg',
+        'Projets_Rea/PHOTO-2021-04-01-13-20-43.jpg',
+        'Projets_Rea/PHOTO-2021-03-20-09-41-55 (1).jpg'
+      ]
+    ];
+    const projetItems = document.querySelectorAll('.projet-item');
+    const modal = document.getElementById('modal-projet');
+    const modalClose = document.getElementById('modal-close');
+    const modalGallery = document.getElementById('modal-gallery');
+
+    projetItems.forEach((item, idx) => {
+      item.addEventListener('click', () => {
+        const index = parseInt(item.getAttribute('data-index'));
+        if (projetsImages[index]) {
+          modalGallery.innerHTML = projetsImages[index].map(src => `<img src="${src}" class="modal-gallery-img">`).join('');
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html> 

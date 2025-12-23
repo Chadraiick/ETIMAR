@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etimar | Expertise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------------------------------- */
+        /* BASE & TYPOGRAPHIE */
+        /* ------------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafbfc;
+            color: #1a1a2e;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h1, h2, h3 {
+            color: #1a1a1a;
+            margin-top: 0;
+        }
+
+/* ------------------------------------------- */
+        /* NAVIGATION BARRE */
+        /* ------------------------------------------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(13, 71, 161, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 18px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 71, 161, 0.98);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1.05em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ------------------------------------------- */
+        /* MENU BURGER (Mobile/Tablette) */
+        /* ------------------------------------------- */
+        .burger-menu {
+            display: none; /* Caché par défaut */
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        /* Styles pour l'état ouvert du burger (Rotation des barres) */
+        .burger-menu.open .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .burger-menu.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.open .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        /* ------------------------------------------- */
+        /* HEADER PRINCIPAL */
+        /* ------------------------------------------- */
+        .expertise-header {
+            position: relative;
+            text-align: center;
+            padding: 80px 20px 60px;
+            margin-top: 80px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(13, 71, 161, 0.25);
+            overflow: hidden;
+        }
+
+        .expertise-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .expertise-header h1 {
+            position: relative;
+            font-size: 3.2em;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.5px;
+        }
+
+        .expertise-header p {
+            position: relative;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ------------------------------------------- */
+        /* GRILLE DES CARTES D'EXPERTISE */
+        /* ------------------------------------------- */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .expertise-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid transparent;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.2);
+            border-top-color: #0d47a1;
+        }
+
+        /* Conteneur d'image */
+        .card-image-container {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .expertise-card:hover .card-image-container img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .card-content h2 {
+            font-size: 1.15em;
+            color: #0d47a1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .card-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .card-content p {
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+
+        /* ------------------------------------------- */
+        /* SOUS-MENU (DETAILS/SUMMARY) */
+        /* ------------------------------------------- */
+        details {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .services-toggle {
+            display: block;
+            cursor: pointer;
+            font-weight: bold;
+            color: #444;
+            transition: color 0.2s;
+        }
+
+        .services-toggle:hover {
+            color: #0d47a1;
+        }
+
+        /* Masquer l'icône de flèche par défaut */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::marker,
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Ajouter une icône personnalisée pour le basculeur */
+        .services-toggle::after {
+            content: '+';
+            float: right;
+            font-size: 1.2em;
+            transition: transform 0.2s;
+        }
+
+        details[open] .services-toggle::after {
+            content: '–';
+        }
+
+        .services-list {
+            margin-top: 10px;
+            padding-left: 20px;
+            font-size: 0.9em;
+            list-style: disc;
+            color: #666;
+        }
+
+        /* ------------------------------------------- */
+        /* SERVICES COMPLÉMENTAIRES - CAROUSEL */
+        /* ------------------------------------------- */
+        .complementary-services {
+            margin-top: 60px;
+            padding: 0;
+        }
+
+        .complementary-services-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .complementary-services-header h2 {
+            font-size: 2.2em;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .complementary-services-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #0d47a1, #1565c0);
+            border-radius: 2px;
+        }
+
+        .complementary-services-header p {
+            font-size: 1.1em;
+            color: #666;
+            max-width: 600px;
+            margin: 25px auto 0;
+            line-height: 1.7;
+        }
+
+        /* Conteneur du carousel */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+            width: 100%;
+        }
+
+        .complementary-card {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .complementary-card.active {
+            opacity: 1;
+        }
+
+        .complementary-card-image-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .complementary-card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .complementary-card:hover .complementary-card-image-container img {
+            transform: scale(1.1);
+        }
+
+        .complementary-card-content {
+            padding: 30px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .complementary-card-content h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .complementary-card-content p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Boutons de navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #0d47a1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: #0d47a1;
+            color: white;
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 20px rgba(13, 71, 161, 0.3);
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        /* Indicateurs (dots) */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 0;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: #0d47a1;
+            transform: scale(1.3);
+        }
+
+        .carousel-dot:hover {
+            background: #1565c0;
+        }
+
+        /* ------------------------------------------- */
+        /* ANIMATIONS AU SCROLL */
+        /* ------------------------------------------- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ------------------------------------------- */
+        /* FOOTER */
+        /* ------------------------------------------- */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #e8eaf6;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #0d47a1;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links a:hover::before {
+            transform: translateX(5px);
+            color: #ffd700;
+        }
+
+        .footer-section:first-child {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+            align-self: flex-end;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-social a svg {
+            width: 22px;
+            height: 22px;
+            fill: #e8eaf6;
+            transition: fill 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: #0d47a1;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
+        }
+
+        .footer-social a:hover svg {
+            fill: #ffffff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #b0bec5;
+            font-size: 0.95em;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+
+        /* ------------------------------------------- */
+        /* RESPONSIVE DESIGN */
+        /* ------------------------------------------- */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: rgba(13, 71, 161, 0.98);
+                backdrop-filter: blur(10px);
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 12px 0;
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .burger-menu {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+            .expertise-header {
+                padding: 60px 20px 40px;
+                margin-top: 60px;
+            }
+            .expertise-header h1 {
+                font-size: 2em;
+            }
+            .expertise-header p {
+                font-size: 1em;
+            }
+            .complementary-services-header h2 {
+                font-size: 1.8em;
+            }
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+            .carousel-nav.prev {
+                left: 10px;
+            }
+            .carousel-nav.next {
+                right: 10px;
+            }
+            .complementary-card-image-container {
+                height: 250px;
+            }
+            footer {
+                padding: 40px 0 20px;
+                margin-top: 50px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-social {
+                align-self: flex-start;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .expertise-header h1 {
+                font-size: 1.8em;
+            }
+            .expertise-header p {
+                font-size: 0.95em;
+            }
+            .expertise-card {
+                padding: 20px;
+            }
+            .card-content h3 {
+                font-size: 1.3em;
+            }
+            .container {
+                width: 95%;
+            }
+            .navbar-container {
+                width: 95%;
+            }
+        }
+
+        /* Très grands écrans */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1300px;
+            }
+            .navbar-container {
+                max-width: 1300px;
+            }
+        }
+
+        /* Optimisation pour les écrans tactiles */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-links a,
+            .btn,
+            .carousel-nav {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+ <nav class="navbar">
+        <div class="navbar-container">
+            <a href="indexdave.html" class="logo">ETIMAR</a>
+            
+            <div class="burger-menu" id="burger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+		<a href="apropos.html">À Propos</a>
+                <a href="expertise.html">Expertise</a>
+		<a href="projets.html">Projets</a>
+                
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="expertise-header fade-in">
+            <h1>Notre Expertise : De la Conception à la Réalisation</h1>
+            <p>Nous combinons l'innovation architecturale et l'identité culturelle africaine pour des projets durables et percutants.</p>
+        </header>
+
+        <section class="expertise-grid">
+            
+            <div class="expertise-card scale-in">
+                <div class="card-image-container">
+                    <img src="RENDER-_1_.webp" alt="Illustration de Conception Architecturale Innovante">
+                </div>
+                <div class="card-content">
+                    <h2>1. Architecture & Design</h2>
+                    <h3>Conception Architecturale Innovante</h3>
+                    <p>Conception architecturale innovante alliant **modernité** et **identité culturelle africaine**.</p>
+                    <details>
+                        <summary class="services-toggle">Services Détaillés</summary>
+                        <ul class="services-list">
+                            <li>Plans (2D) et Modélisation (3D)</li>
+                            <li>Dossiers Techniques complets</li>
+                            <li>Conception Spécialisée (Villa, Bureaux, Espaces publics)</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <div class="expertise-card scale-in">
+                <div class="card-image-container">
+                    <img src="RENDER-_6_.webp" alt="Illustration de Suivi de Chantier et Gestion de Projet">
+                </div>
+                <div class="card-content">
+                    <h2>2. Suivi et Maîtrise d'Ouvrage</h2>
+                    <h3>Garantie de Réalisation</h3>
+                    <p>Planification stratégique pour des villes africaines **durables et inclusives**.</p>
+                    <details>
+                        <summary class="services-toggle">Services Détaillés</summary>
+                        <ul class="services-list">
+                            <li>Supervision et contrôle de chantiers rigoureux</li>
+                            <li>Coordination des intervenants et gestions techniques</li>
+                            <li>Planification Stratégique Urbaine</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <div class="expertise-card scale-in">
+                <div class="card-image-container">
+                    <img src="RENDER-_9_.webp" alt="Illustration de Design d'Intérieur et Aménagement">
+                </div>
+                <div class="card-content">
+                    <h2>3. Design & Aménagement</h2>
+                    <h3>Espaces Fonctionnels et Esthétiques</h3>
+                    <p>Création d'espaces intérieurs fonctionnels et esthétiques adaptés aux **besoins locaux**.</p>
+                    <details>
+                        <summary class="services-toggle">Services Détaillés</summary>
+                        <ul class="services-list">
+                            <li>Décoration moderne</li>
+                            <li>Optimisation lumière et ventilation naturelle</li>
+                            <li>Création de mobilier intégré et sur mesure</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <div class="expertise-card scale-in">
+                <div class="card-image-container">
+                    <img src="ADU036.jpg" alt="Illustration d'Architecture Bioclimatique et Durable">
+                </div>
+                <div class="card-content">
+                    <h2>4. Architecture Durable</h2>
+                    <h3>Solutions Écologiques et Bioclimatiques</h3>
+                    <p>Structuration de projets de développement à **impact social**. Conception Bioclimatique.</p>
+                    <details>
+                        <summary class="services-toggle">Services Détaillés</summary>
+                        <ul class="services-list">
+                            <li>Conception Bioclimatique</li>
+                            <li>Solutions écologiques et à faible coût énergétique</li>
+                            <li>Structuration de projets de développement à impact social</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+        </section>
+        
+        <section class="complementary-services">
+            <div class="complementary-services-header fade-in">
+                <h2>Services Complémentaires</h2>
+                <p>Une expertise technique complète pour optimiser vos projets d'infrastructure et de développement.</p>
+            </div>
+            
+            <div class="carousel-container">
+                <button class="carousel-nav prev" id="prevBtn">‹</button>
+                <button class="carousel-nav next" id="nextBtn">›</button>
+                
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <div class="complementary-card active">
+                        <div class="complementary-card-image-container">
+                            <img src="RENDER-_1_.webp" alt="Rendus 3D et Visualisations">
+                        </div>
+                        <div class="complementary-card-content">
+                            <h3>Rendus 3D et Visualisations réalistes</h3>
+                            <p>Création de visualisations 3D photoréalistes pour présenter vos projets architecturaux avec précision et impact visuel.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complementary-card">
+                        <div class="complementary-card-image-container">
+                            <img src="RENDER-_6_.webp" alt="Maquettes physiques">
+                        </div>
+                        <div class="complementary-card-content">
+                            <h3>Maquettes physiques et prototypes architecturaux</h3>
+                            <p>Réalisation de maquettes physiques détaillées et de prototypes pour une meilleure compréhension de vos projets.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complementary-card">
+                        <div class="complementary-card-image-container">
+                            <img src="RENDER-_9_.webp" alt="Études de faisabilité">
+                        </div>
+                        <div class="complementary-card-content">
+                            <h3>Études de faisabilité et dossiers de permis de construire</h3>
+                            <p>Accompagnement complet dans la préparation de vos dossiers administratifs et études techniques nécessaires.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complementary-card">
+                        <div class="complementary-card-image-container">
+                            <img src="ADU036.jpg" alt="Conseil en gestion budgétaire">
+                        </div>
+                        <div class="complementary-card-content">
+                            <h3>Conseil en gestion budgétaire et planification de projet</h3>
+                            <p>Expertise en gestion financière et planification stratégique pour optimiser vos investissements et délais.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-indicators" id="carouselIndicators"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>ETIMAR</h3>
+                <p>Architecture, Ingénierie et Design pour l'Afrique. Nous construisons l'avenir avec innovation, durabilité et respect de l'identité culturelle.</p>
+                <div class="footer-social">
+                    <a href="#" title="Facebook" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" title="Instagram" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" title="Twitter" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="indexdave.html">Accueil</a></li>
+                    <li><a href="apropos.html">À Propos</a></li>
+                    <li><a href="expertise.html">Expertise</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 contact@etimar.com</p>
+                <p>📞 +33 1 23 45 67 89</p>
+                <p>📍 123 Avenue de l'Architecture<br>75001 Paris, France</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="expertise.html">Architecture & Design</a></li>
+                    <li><a href="expertise.html">Maîtrise d'Œuvre</a></li>
+                    <li><a href="expertise.html">Design d'Intérieur</a></li>
+                    <li><a href="expertise.html">Architecture Durable</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ETIMAR. Tous droits réservés. | Architecture & Ingénierie en Afrique</p>
+        </div>
+    </footer>
+
+<script>
+
+ // --- GESTION DU MENU BURGER ---
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.querySelector('.navbar');
+
+        burger.addEventListener('click', () => {
+            // Basculer la classe 'open' sur le burger pour l'animation
+            burger.classList.toggle('open');
+            // Basculer la classe 'open' sur les liens pour les afficher/masquer
+            navLinks.classList.toggle('open');
+        });
+        
+        // Fermer le menu après un clic sur un lien (sur mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    burger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                }
+            });
+        });
+
+        // --- EFFET DE SCROLL SUR LA NAVBAR ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- ANIMATIONS AU SCROLL ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observer tous les éléments avec des classes d'animation
+        document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- GESTION DU CAROUSEL ---
+        const carouselWrapper = document.getElementById('carouselWrapper');
+        const cards = document.querySelectorAll('.complementary-card');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('carouselIndicators');
+        
+        let currentIndex = 0;
+        const totalCards = cards.length;
+
+        // Créer les indicateurs (dots)
+        for (let i = 0; i < totalCards; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('data-index', i);
+            dot.addEventListener('click', () => goToSlide(i));
+            indicatorsContainer.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        // Fonction pour mettre à jour le carousel
+        function updateCarousel() {
+            // Déplacer le wrapper
+            carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Mettre à jour les cartes actives
+            cards.forEach((card, index) => {
+                if (index === currentIndex) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+            
+            // Mettre à jour les indicateurs
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Fonction pour aller à une slide spécifique
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        // Fonction pour slide suivante
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalCards;
+            updateCarousel();
+        }
+
+        // Fonction pour slide précédente
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            updateCarousel();
+        }
+
+        // Event listeners pour les boutons
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto-play (optionnel - défilement automatique toutes les 5 secondes)
+        let autoPlayInterval = setInterval(nextSlide, 5000);
+
+        // Pause auto-play au survol
+        const carouselContainer = document.querySelector('.carousel-container');
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+
+        carouselContainer.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+</script>
+
+
+</body>
+</html>

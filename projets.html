@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Mes Projets</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* ========================================================= */
+        /* --- 1. GÉNÉRAL ET NAVBAR --- */
+        /* ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root { 
+            --primary-color: #0d47a1;
+        }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fafbfc;
+            color: #1a1a2e;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            background: rgba(13, 71, 161, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 18px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 71, 161, 0.98);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1.05em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        .burger-menu.open .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .burger-menu.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.open .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* ========================================================= */
+        /* --- 2. MENU PLEIN ÉCRAN --- */
+        /* ========================================================= */
+        .fullscreen-menu {
+            position:fixed; top:0; left:0; width:100%; height:100vh;
+            background-color:#f8f7f7; display:flex; justify-content:center;
+            align-items: flex-start; overflow-y: auto; padding-top: 100px; 
+            padding-bottom: 50px;
+            clip-path:circle(0% at 95% 5%);
+            transition:all 0.6s cubic-bezier(0.77,0,0.175,1);
+            z-index:999; overflow-x:hidden;
+        }
+
+        .fullscreen-menu.active{clip-path:circle(150% at 90% 10%)}
+
+        .menu-container{
+            display:flex; flex-direction:column; align-items:flex-start;
+            width:80%; max-width:1000px; position:relative;
+        }
+
+        .menu-item{
+            font-size: 3.5rem; font-weight:500; text-transform:uppercase;
+            color:rgba(9, 9, 9, 0.7); text-decoration:none; margin:10px 0;
+            cursor:pointer; transition:all 0.3s ease; position:relative
+        }
+        .menu-item:hover{color:#070707;transform:translateX(10px)}
+
+
+        /* ========================================================= */
+        /* --- 3. SECTION PROJETS (Grille d'Images) --- */
+        /* ========================================================= */
+        #projects-gallery-section {
+            padding-top: 100px; /* Espace pour la navbar fixe */
+            padding-bottom: 40px;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grille adaptative */
+            gap: 25px;
+            padding: 0 5%;
+            max-width: 1200px; /* Limite la largeur de la grille */
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 4px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.2);
+            border-top-color: #0d47a1;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 220px; /* Hauteur fixe pour toutes les images */
+            object-fit: cover; /* Assure que l'image couvre la zone sans déformation */
+            display: block;
+        }
+
+        .project-card-info {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .project-card-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .project-card-info p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 0;
+        }
+
+        /* Section de détail de projet (simple placeholder) */
+        #project-detail-view {
+            padding-top: 100px;
+            display: none; /* Cachée par défaut */
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        /* ========================================================= */
+        /* --- 4. ANIMATIONS AU SCROLL --- */
+        /* ========================================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ========================================================= */
+        /* --- PAGINATION --- */
+        /* ========================================================= */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 50px 0;
+            padding: 0 5%;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pagination-btn {
+            min-width: 40px;
+            height: 40px;
+            padding: 0 15px;
+            background-color: #ffffff;
+            border: 2px solid #e8eaf6;
+            border-radius: 8px;
+            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .pagination-btn:hover:not(.disabled):not(.active) {
+            background-color: #0d47a1;
+            color: #ffffff;
+            border-color: #0d47a1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+        }
+
+        .pagination-btn.active {
+            background-color: #0d47a1;
+            color: #ffffff;
+            border-color: #0d47a1;
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .pagination-ellipsis {
+            padding: 0 10px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* ========================================================= */
+        /* --- FOOTER --- */
+        /* ========================================================= */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #e8eaf6;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #0d47a1;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links a:hover::before {
+            transform: translateX(5px);
+            color: #ffd700;
+        }
+
+        .footer-section:first-child {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+            align-self: flex-end;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-social a svg {
+            width: 22px;
+            height: 22px;
+            fill: #e8eaf6;
+            transition: fill 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: #0d47a1;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
+        }
+
+        .footer-social a:hover svg {
+            fill: #ffffff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #b0bec5;
+            font-size: 0.95em;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+
+        /* ========================================================= */
+        /* --- 5. RESPONSIVE --- */
+        /* ========================================================= */
+        @media (max-width: 992px) {
+            .burger-menu {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: rgba(13, 71, 161, 0.98);
+                backdrop-filter: blur(10px);
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 12px 0;
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            footer {
+                padding: 40px 0 20px;
+                margin-top: 50px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-social {
+                align-self: flex-start;
+                margin-top: 20px;
+            }
+            .pagination-container {
+                margin: 30px 0;
+            }
+            .pagination-btn {
+                min-width: 35px;
+                height: 35px;
+                padding: 0 10px;
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 3%;
+            }
+            .project-card-info h4 {
+                font-size: 1.2rem;
+            }
+            .project-card-info p {
+                font-size: 0.9rem;
+            }
+            #projects-gallery-section h1 {
+                font-size: 2em;
+            }
+            .navbar-container {
+                width: 95%;
+            }
+        }
+
+        /* Très grands écrans */
+        @media (min-width: 1400px) {
+            .project-grid {
+                max-width: 1400px;
+            }
+            .navbar-container {
+                max-width: 1300px;
+            }
+        }
+
+        /* Optimisation pour les écrans tactiles */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-links a,
+            .project-card {
+                min-height: 44px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="indexdave.html" class="logo">ETIMAR</a>
+            
+            <div class="burger-menu" id="burger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="apropos.html">À Propos</a>
+                <a href="expertise.html">Expertise</a>
+                <a href="projets.html">Projets</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="projects-gallery-section" class="page-section">
+        <h1 class="mb-5 display-5 fw-bold fade-in" style="color: #1a1a2e;">Nos Réalisations</h1>
+        
+        <div class="project-grid">
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-1')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+1" alt="Description du projet 1">
+                <div class="project-card-info">
+                    <h4>Projet Résidentiel Urbain</h4>
+                    <p>Architecture - Paris, France</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-2')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+2" alt="Description du projet 2">
+                <div class="project-card-info">
+                    <h4>Aménagement de Quartier</h4>
+                    <p>Urbanisme - Lyon, France</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-3')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+3" alt="Description du projet 3">
+                <div class="project-card-info">
+                    <h4>Bureaux Modernes</h4>
+                    <p>Développement - Bordeaux, France</p>
+                </div>
+            </div>
+            
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-4')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+4" alt="Description du projet 4">
+                <div class="project-card-info">
+                    <h4>Infrastructure Pont</h4>
+                    <p>Ingénierie - Marseille, France</p>
+                </div>
+            </div>
+            
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-5')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+5" alt="Description du projet 5">
+                <div class="project-card-info">
+                    <h4>Réhabilitation Historique</h4>
+                    <p>Architecture - Rome, Italie</p>
+                </div>
+            </div>
+            
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-6')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+6" alt="Description du projet 6">
+                <div class="project-card-info">
+                    <h4>Plan Vert Urbain</h4>
+                    <p>Urbanisme - Berlin, Allemagne</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-7')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+7" alt="Description du projet 7">
+                <div class="project-card-info">
+                    <h4>Complexe Commercial Moderne</h4>
+                    <p>Architecture - Madrid, Espagne</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-8')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+8" alt="Description du projet 8">
+                <div class="project-card-info">
+                    <h4>Éco-Quartier Durable</h4>
+                    <p>Urbanisme - Amsterdam, Pays-Bas</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-9')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+9" alt="Description du projet 9">
+                <div class="project-card-info">
+                    <h4>Centre Culturel</h4>
+                    <p>Architecture - Bruxelles, Belgique</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-10')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+10" alt="Description du projet 10">
+                <div class="project-card-info">
+                    <h4>Réseau Routier Intelligent</h4>
+                    <p>Ingénierie - Zurich, Suisse</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-11')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+11" alt="Description du projet 11">
+                <div class="project-card-info">
+                    <h4>Hôtel Éco-Luxe</h4>
+                    <p>Architecture - Vienne, Autriche</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-12')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+12" alt="Description du projet 12">
+                <div class="project-card-info">
+                    <h4>Parc Technologique</h4>
+                    <p>Développement - Stockholm, Suède</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-13')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+13" alt="Description du projet 13">
+                <div class="project-card-info">
+                    <h4>Rénovation Énergétique</h4>
+                    <p>Architecture - Copenhague, Danemark</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-14')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+14" alt="Description du projet 14">
+                <div class="project-card-info">
+                    <h4>Village Éco-Touristique</h4>
+                    <p>Urbanisme - Lisbonne, Portugal</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-15')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+15" alt="Description du projet 15">
+                <div class="project-card-info">
+                    <h4>Gare Multimodale</h4>
+                    <p>Ingénierie - Prague, République tchèque</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-16')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+16" alt="Description du projet 16">
+                <div class="project-card-info">
+                    <h4>Résidence Étudiante</h4>
+                    <p>Architecture - Varsovie, Pologne</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-17')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+17" alt="Description du projet 17">
+                <div class="project-card-info">
+                    <h4>Centre de Recherche</h4>
+                    <p>Architecture - Helsinki, Finlande</p>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" onclick="showProjectDetail('projet-18')">
+                <img src="https://via.placeholder.com/400x220?text=Projet+18" alt="Description du projet 18">
+                <div class="project-card-info">
+                    <h4>Infrastructure Portuaire</h4>
+                    <p>Ingénierie - Oslo, Norvège</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" id="paginationContainer" style="display: none;">
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </section>
+
+    <section id="project-detail-view" class="page-section">
+        <button class="btn btn-outline-secondary mb-4" onclick="showProjectsGallery()">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </button>
+        <h2 id="detail-project-title" class="display-4 fw-bold mb-4">Nom du Projet</h2>
+        <p>Plus de détails sur le projet ici. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, quos?</p>
+        <img id="detail-project-image" src="https://via.placeholder.com/800x450?text=Image+du+Projet+Detail" alt="Image du projet en détail" class="img-fluid rounded mb-3">
+        <p>Description longue du projet, technologies utilisées, défis, solutions apportées, etc.</p>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>ETIMAR</h3>
+                <p>Architecture, Ingénierie et Design pour l'Afrique. Nous construisons l'avenir avec innovation, durabilité et respect de l'identité culturelle.</p>
+                <div class="footer-social">
+                    <a href="#" title="Facebook" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" title="Instagram" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" title="Twitter" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="indexdave.html">Accueil</a></li>
+                    <li><a href="apropos.html">À Propos</a></li>
+                    <li><a href="expertise.html">Expertise</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 contact@etimar.com</p>
+                <p>📞 +33 1 23 45 67 89</p>
+                <p>📍 123 Avenue de l'Architecture<br>75001 Paris, France</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="expertise.html">Architecture & Design</a></li>
+                    <li><a href="expertise.html">Maîtrise d'Œuvre</a></li>
+                    <li><a href="expertise.html">Design d'Intérieur</a></li>
+                    <li><a href="expertise.html">Architecture Durable</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ETIMAR. Tous droits réservés. | Architecture & Ingénierie en Afrique</p>
+        </div>
+    </footer>
+
+    <script>
+        // =========================================================================
+        // DOM ELEMENTS ET VARIABLES
+        // =========================================================================
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.querySelector('.navbar');
+        const projectsGallerySection = document.getElementById('projects-gallery-section');
+        const projectDetailView = document.getElementById('project-detail-view');
+
+        // =========================================================================
+        // DONNÉES DES PROJETS (pour les détails)
+        // =========================================================================
+        const projectData = {
+            'projet-1': {
+                title: 'Projet Résidentiel Urbain',
+                description: 'Conception d\'un immeuble résidentiel moderne avec des espaces verts intégrés au cœur de Paris. Accent mis sur l\'efficacité énergétique et l\'esthétique minimaliste.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+1+Detail',
+                category: 'Architecture'
+            },
+            'projet-2': {
+                title: 'Aménagement de Quartier',
+                description: 'Développement d\'un nouveau quartier à Lyon, incluant des zones piétonnes, des parcs et des services locaux pour une communauté durable et dynamique.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+2+Detail',
+                category: 'Urbanisme'
+            },
+            'projet-3': {
+                title: 'Bureaux Modernes',
+                description: 'Construction d\'un complexe de bureaux à Bordeaux, conçu pour maximiser la lumière naturelle et offrir un environnement de travail flexible et stimulant.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+3+Detail',
+                category: 'Développement'
+            },
+            'projet-4': {
+                title: 'Infrastructure Pont',
+                description: 'Ingénierie d\'un pont innovant à Marseille, reliant deux rives et intégrant des pistes cyclables et des points de vue panoramiques.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+4+Detail',
+                category: 'Ingénierie'
+            },
+            'projet-5': {
+                title: 'Réhabilitation Historique',
+                description: 'Restauration et modernisation d\'un bâtiment historique à Rome, préservant son charme d\'origine tout en l\'adaptant aux normes contemporaines.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+5+Detail',
+                category: 'Architecture'
+            },
+            'projet-6': {
+                title: 'Plan Vert Urbain',
+                description: 'Mise en œuvre d\'un plan d\'urbanisme à Berlin visant à augmenter les espaces verts, améliorer la qualité de l\'air et promouvoir la biodiversité en ville.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+6+Detail',
+                category: 'Urbanisme'
+            },
+            'projet-7': {
+                title: 'Complexe Commercial Moderne',
+                description: 'Conception d\'un complexe commercial moderne à Madrid intégrant des espaces de vente, de restauration et de loisirs dans un design contemporain.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+7+Detail',
+                category: 'Architecture'
+            },
+            'projet-8': {
+                title: 'Éco-Quartier Durable',
+                description: 'Développement d\'un éco-quartier à Amsterdam avec des logements écologiques, des espaces verts et des infrastructures durables.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+8+Detail',
+                category: 'Urbanisme'
+            },
+            'projet-9': {
+                title: 'Centre Culturel',
+                description: 'Construction d\'un centre culturel à Bruxelles accueillant des expositions, des spectacles et des événements communautaires.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+9+Detail',
+                category: 'Architecture'
+            },
+            'projet-10': {
+                title: 'Réseau Routier Intelligent',
+                description: 'Ingénierie d\'un réseau routier intelligent à Zurich avec systèmes de gestion du trafic et technologies durables.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+10+Detail',
+                category: 'Ingénierie'
+            },
+            'projet-11': {
+                title: 'Hôtel Éco-Luxe',
+                description: 'Conception d\'un hôtel éco-luxe à Vienne combinant luxe et durabilité avec des matériaux écologiques et des technologies vertes.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+11+Detail',
+                category: 'Architecture'
+            },
+            'projet-12': {
+                title: 'Parc Technologique',
+                description: 'Développement d\'un parc technologique à Stockholm pour les entreprises innovantes avec des espaces collaboratifs modernes.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+12+Detail',
+                category: 'Développement'
+            },
+            'projet-13': {
+                title: 'Rénovation Énergétique',
+                description: 'Rénovation énergétique complète d\'un bâtiment à Copenhague pour atteindre des standards de performance environnementale élevés.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+13+Detail',
+                category: 'Architecture'
+            },
+            'projet-14': {
+                title: 'Village Éco-Touristique',
+                description: 'Création d\'un village éco-touristique à Lisbonne intégrant hébergement, restauration et activités dans un cadre naturel préservé.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+14+Detail',
+                category: 'Urbanisme'
+            },
+            'projet-15': {
+                title: 'Gare Multimodale',
+                description: 'Ingénierie d\'une gare multimodale à Prague connectant train, métro, bus et vélos dans un hub de transport moderne.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+15+Detail',
+                category: 'Ingénierie'
+            },
+            'projet-16': {
+                title: 'Résidence Étudiante',
+                description: 'Construction d\'une résidence étudiante moderne à Varsovie offrant des logements abordables et des espaces communs.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+16+Detail',
+                category: 'Architecture'
+            },
+            'projet-17': {
+                title: 'Centre de Recherche',
+                description: 'Conception d\'un centre de recherche à Helsinki avec des laboratoires de pointe et des espaces collaboratifs innovants.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+17+Detail',
+                category: 'Architecture'
+            },
+            'projet-18': {
+                title: 'Infrastructure Portuaire',
+                description: 'Ingénierie d\'une infrastructure portuaire moderne à Oslo avec des installations durables et des systèmes de gestion avancés.',
+                image: 'https://via.placeholder.com/800x450?text=Projet+18+Detail',
+                category: 'Ingénierie'
+            }
+        };
+
+        // =========================================================================
+        // LOGIQUE GLOBALE DU MENU ET DE NAVIGATION
+        // =========================================================================
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+        
+        // Fermer le menu après un clic sur un lien (sur mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    burger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                }
+            });
+        });
+
+        // Fonctions pour masquer/afficher les sections
+        function hideSection(section) {
+            section.style.opacity = '0';
+            section.style.pointerEvents = 'none'; // Désactive les événements de souris
+            setTimeout(() => { section.style.display = 'none'; }, 500); 
+        }
+
+        function showSection(section) {
+            section.style.display = 'block';
+            section.style.pointerEvents = 'auto'; // Active les événements de souris
+            setTimeout(() => {
+                section.style.opacity = '1';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 50); 
+        }
+
+        // Affiche la page d'accueil (ici, la galerie de projets est la "page d'accueil" par défaut)
+        function showHomePage() {
+            showProjectsGallery(); // Affiche directement la galerie
+        }
+
+        // Affiche la galerie de projets
+        function showProjectsGallery() {
+            hideSection(projectDetailView);
+            showSection(projectsGallerySection);
+        }
+
+        // Affiche les détails d'un projet spécifique
+        function showProjectDetail(projectId) {
+            const project = projectData[projectId];
+            if (project) {
+                document.getElementById('detail-project-title').textContent = project.title;
+                document.getElementById('detail-project-image').src = project.image;
+                document.querySelector('#project-detail-view p:nth-of-type(1)').textContent = project.description;
+
+                hideSection(projectsGallerySection);
+                showSection(projectDetailView);
+            }
+        }
+
+        // Initialisation : s'assurer que la galerie est visible et le détail caché au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            projectDetailView.style.display = 'none'; // Cache la section de détail au démarrage
+        });
+
+        // --- EFFET DE SCROLL SUR LA NAVBAR ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- ANIMATIONS AU SCROLL ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observer tous les éléments avec des classes d'animation
+        document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // =========================================================================
+        // SYSTÈME DE PAGINATION
+        // =========================================================================
+        const projectsPerPage = 13;
+        const projectGrid = document.querySelector('.project-grid');
+        const paginationContainer = document.getElementById('paginationContainer');
+        const pagination = document.getElementById('pagination');
+        const allProjects = document.querySelectorAll('.project-card');
+        let currentPage = 1;
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(allProjects.length / projectsPerPage);
+
+        // Fonction pour afficher les projets de la page actuelle
+        function displayProjects(page) {
+            const startIndex = (page - 1) * projectsPerPage;
+            const endIndex = startIndex + projectsPerPage;
+
+            allProjects.forEach((project, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    project.style.display = 'block';
+                    // Réinitialiser l'animation
+                    project.classList.remove('visible');
+                    setTimeout(() => {
+                        project.classList.add('visible');
+                    }, 50);
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+
+            // Afficher la pagination seulement s'il y a plus de 13 projets
+            if (allProjects.length > projectsPerPage) {
+                paginationContainer.style.display = 'flex';
+                renderPagination();
+            } else {
+                paginationContainer.style.display = 'none';
+            }
+
+            // Scroll vers le haut de la grille
+            projectGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Fonction pour rendre la pagination
+        function renderPagination() {
+            pagination.innerHTML = '';
+
+            // Bouton Précédent
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'pagination-btn';
+            prevBtn.textContent = '‹ Précédent';
+            prevBtn.disabled = currentPage === 1;
+            if (currentPage === 1) prevBtn.classList.add('disabled');
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayProjects(currentPage);
+                }
+            });
+            pagination.appendChild(prevBtn);
+
+            // Numéros de page
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, currentPage + 2);
+
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.className = 'pagination-btn';
+                firstBtn.textContent = '1';
+                firstBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    displayProjects(currentPage);
+                });
+                pagination.appendChild(firstBtn);
+
+                if (startPage > 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.className = 'pagination-ellipsis';
+                    ellipsis.textContent = '...';
+                    pagination.appendChild(ellipsis);
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-btn';
+                if (i === currentPage) pageBtn.classList.add('active');
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    displayProjects(currentPage);
+                });
+                pagination.appendChild(pageBtn);
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.className = 'pagination-ellipsis';
+                    ellipsis.textContent = '...';
+                    pagination.appendChild(ellipsis);
+                }
+
+                const lastBtn = document.createElement('button');
+                lastBtn.className = 'pagination-btn';
+                lastBtn.textContent = totalPages;
+                lastBtn.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    displayProjects(currentPage);
+                });
+                pagination.appendChild(lastBtn);
+            }
+
+            // Bouton Suivant
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'pagination-btn';
+            nextBtn.textContent = 'Suivant ›';
+            nextBtn.disabled = currentPage === totalPages;
+            if (currentPage === totalPages) nextBtn.classList.add('disabled');
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayProjects(currentPage);
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // Initialiser l'affichage
+        displayProjects(1);
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
